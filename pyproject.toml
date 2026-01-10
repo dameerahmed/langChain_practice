@@ -10,5 +10,6 @@ dependencies = [
     "langchain-groq>=1.1.1",
     "langchain-openai>=1.1.7",
     "python-dotenv>=1.2.1",
+    "scikit-learn>=1.8.0",
     "typing>=3.10.0.0",
 ]
