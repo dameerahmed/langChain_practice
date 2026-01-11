@@ -10,6 +10,7 @@ model = ChatGroq(
     model="qwen/qwen3-32b",
 )
 
+
 parser = JsonOutputParser()
 template = PromptTemplate(
     template="give me the name age and address of the person: {format_instructions}",
