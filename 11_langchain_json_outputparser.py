@@ -13,11 +13,12 @@ model = ChatGroq(
 
 parser = JsonOutputParser()
 template = PromptTemplate(
-    template="give me the name age and address of the person: {format_instructions}",
+    template="""Give me the name, age and address of a person. 
+    Return ONLY the JSON object. Do not include any thinking tags or preamble.
+    {format_instructions}""",
     input_variables=[],
     partial_variables={"format_instructions": parser.get_format_instructions()},
 )
-
 prompt = template.format()
 
 response = model.invoke(prompt)
