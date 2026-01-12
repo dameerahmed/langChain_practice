@@ -12,4 +12,3 @@ model = ChatGoogleGenerativeAI(
 
 response = model.invoke("hy.")
 print(response.content)
-print(response.metadata)
