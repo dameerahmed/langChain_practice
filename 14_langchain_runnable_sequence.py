@@ -1,22 +1,20 @@
-from langchain_groq import ChatGroq
 from langchain_google_genai import ChatGoogleGenerativeAI
+from langchain_groq import ChatGroq
 from langchain_core.prompts import PromptTemplate
+from langchain_core.runnables import RunnableSequence
 from langchain_core.output_parsers import StrOutputParser
 from typing import TypedDict, Literal
 from dotenv import load_dotenv
 import os
 
 load_dotenv()
-
-groq_model = ChatGroq(
-    model="qwen/qwen3-32b",
-)
 google_model = ChatGoogleGenerativeAI(
     model="gemini-2.5-flash",
 )
 
-
-
+groq_model = ChatGroq(
+    model="qwen/qwen3-32b",
+)
 class reviewDict(TypedDict):
     title: str
     summary: str
@@ -39,7 +37,7 @@ template2 = PromptTemplate(
     input_variables=["story"],
 )
 
-chain = template1 | groq_model | parser | template2 | structured_model
+chain = RunnableSequence(template1, groq_model, parser, template2, structured_model)
 
 response = chain.invoke({"topic": "artificial intelligence"})
 
@@ -53,4 +51,3 @@ print(response["status"])
 
 
 chain.get_graph().print_ascii()
-
