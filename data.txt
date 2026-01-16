@@ -1,0 +1,11 @@
+Student_ID,Name,Age,Department,Semester,GPA
+101,Ahmed Khan,20,Computer Science,3rd,3.5
+102,Zara Sheikh,21,Software Engineering,5th,3.8
+103,Bilal Ahmed,22,Data Science,7th,3.2
+104,Ayesha Malik,19,Information Technology,1st,3.9
+105,Rehan Siddiqui,23,Artificial Intelligence,8th,3.1
+106,Fatima Noor,20,Computer Science,4th,3.6
+107,Usman Ghani,21,Cyber Security,6th,3.4
+108,Sana Mir,22,Data Science,7th,3.7
+109,Fahad Mustafa,20,Software Engineering,3rd,2.9
+110,Hina Altaf,19,Information Technology,2nd,3.5
