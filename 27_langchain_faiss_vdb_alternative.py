@@ -5,20 +5,11 @@ from langchain_community.vectorstores import FAISS
 from langchain_core.documents import Document
 from dotenv import load_dotenv
 
-from uuid import uuid4
+
 load_dotenv()
 
-# --- STEP 1: CLEAN SLATE ---
-# FAISS stores indexes in a folder or file. We'll use a local folder save.
-DB_FOLDER = "faiss_index"
-  
 
-# --- STEP 2: SETUP MODEL ---
 emb_model = GoogleGenerativeAIEmbeddings(model="models/gemini-embedding-001")
-
-# --- STEP 3: CREATE DATA ---
-# FAISS is created from documents directly usually, or initialized empty.
-# We'll create it from documents to start.
 
 document_1 = Document(
     page_content="I had chocolate chip pancakes and scrambled eggs for breakfast this morning.",
@@ -95,18 +86,12 @@ documents = [
 
 print("Creating FAISS vector store...")
 vector_store = FAISS.from_documents(documents, emb_model)
+vector_store.save_local("faiss_index")
 print("Success! Created vector store.")
 
-# Save it locally
-vector_store.save_local(DB_FOLDER)
-print(f"Saved index to {DB_FOLDER}")
+retriever=vector_store.as_retriever(search_kwargs={"k":2})
 
-# --- STEP 4: PERFORM A SEARCH ---
-query = "Tell me about the economy"
-print(f"\nQuerying: '{query}'")
-
-results = vector_store.similarity_search(query,k=2)
-
+results=retriever.invoke("ecnomic")
 # Display results
 for res in results:
     print(f"\n[Source: {res.metadata.get('source')}]")
